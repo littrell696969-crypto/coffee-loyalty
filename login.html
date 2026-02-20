@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Staff Login</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<h2>Staff Login</h2>
+
+<input type="email" id="email" placeholder="Email"><br><br>
+<input type="password" id="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<p id="error"></p>
+
+<script>
+
+const SUPABASE_URL = "https://awuzfbnwkrtpwtbszmig.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXpmYm53a3J0cHd0YnN6bWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MDMxNjYsImV4cCI6MjA4NzE3OTE2Nn0.mOGcTwtKp8KC1tXZe9JvozygTfcRJPK2S8oXQcycVm8";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);
+
+async function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  console.log("DATA:", data);
+  console.log("ERROR:", error);
+
+  if (error) {
+    document.getElementById("error").innerText = error.message;
+    return;
+  }
+
+  window.location.href = "staff.html";
+}
+</script>
+
+</body>
+</html>
