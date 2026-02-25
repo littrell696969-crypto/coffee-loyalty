@@ -18,8 +18,10 @@ body {
 }
 
 .logo {
-  width: 180px;
-  margin-bottom: 15px;
+  max-width: 140px;
+  height: auto;
+  display: block;
+  margin: 0 auto 10px auto;
 }
 
 h1 {
@@ -56,3 +58,4 @@ button.active {
 #qr {
   margin-top: 15px;
 }
+
