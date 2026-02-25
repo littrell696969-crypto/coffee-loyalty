@@ -51,34 +51,49 @@ async function addCoffee(userId) {
 
   result.innerText = `Coffee added: ${newCount}/6`;
 }
+async function onScanSuccess(decodedText) {
+  await addCoffee(decodedText);
 
-function onScanSuccess(decodedText) {
-  addCoffee(decodedText);
+  if (html5QrCode) {
+    await html5QrCode.stop(); // stop after one scan
+  }
 }
 async function logout() {
   await supabaseClient.auth.signOut();
   window.location.href = "login.html";
 }
 let html5QrCode = null;
-
 async function startScanner() {
   const result = document.getElementById("result");
 
   try {
-    // Force permission request
+    // Request camera permission first
     await navigator.mediaDevices.getUserMedia({ video: true });
 
     const devices = await Html5Qrcode.getCameras();
 
-    if (!devices || devices.length === 0 || !devices[0].id) {
-      result.innerText = "Camera permission not granted";
+    if (!devices || devices.length === 0) {
+      result.innerText = "No camera found";
+      return;
+    }
+
+    // Try to find back camera (phones)
+    const backCamera = devices.find(device =>
+      device.label && device.label.toLowerCase().includes("back")
+    );
+
+    // Use back camera if found, otherwise fallback to first device (laptop safe)
+    const cameraId = backCamera ? backCamera.id : devices[0].id;
+
+    if (!cameraId) {
+      result.innerText = "Camera not accessible";
       return;
     }
 
     html5QrCode = new Html5Qrcode("reader");
 
     await html5QrCode.start(
-      devices[0].id,
+      cameraId,
       { fps: 10, qrbox: 250 },
       onScanSuccess
     );
