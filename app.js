@@ -1,3 +1,5 @@
+alert("app.js loaded");
+
 let currentLang = localStorage.getItem("lang") || "en";
 
 const translations = {
@@ -93,4 +95,5 @@ if (data.coffee_count === 5) {
 
 
 init();
+
 
