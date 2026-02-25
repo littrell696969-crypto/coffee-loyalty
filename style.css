@@ -5,32 +5,48 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin: 0;
 }
 
 .card {
   background: white;
   padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   text-align: center;
   width: 320px;
 }
 
 h1 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  color: #4b2e2e;
 }
 
-.stamps {
-  font-size: 40px;
-  margin: 20px 0;
-}
-
-.message {
-  font-size: 18px;
-  margin-bottom: 20px;
+button {
+  padding: 6px 12px;
+  margin: 4px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #ddd;
   font-weight: bold;
 }
 
-.qr {
+button.active {
+  background: #6b4f4f;
+  color: white;
+}
+
+#stamps {
+  font-size: 32px;
+  margin: 20px 0;
+}
+
+#message {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#qr {
   margin-top: 15px;
 }
