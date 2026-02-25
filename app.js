@@ -94,6 +94,16 @@ if (data.coffee_count === 5) {
 }
 
 
-init();
+init(const stampsDiv = document.getElementById("stamps");
+const messageDiv = document.getElementById("message");
+
+document.getElementById("title").innerText =
+  translations[currentLang].title;
+
+document.getElementById("showQrText").innerText =
+  translations[currentLang].showQr;
+
+stampsDiv.innerHTML = "";);
+
 
 
