@@ -3,13 +3,13 @@ let currentLang = localStorage.getItem("lang") || "en";
 
 const translations = {
   en: {
-    title: "Coffee Loyalty",
+    title: "Kohvik Sillake Loyalty",
     nextFree: "☕ Next coffee is FREE!",
     untilFree: (n) => `${n} coffees until free one`,
     showQr: "Show this QR code to staff"
   },
   et: {
-    title: "Kohvi Lojaalsuskaart",
+    title: "Kohvik Sillake Lojaalsuskaart",
     nextFree: "☕ Järgmine kohv on TASUTA!",
     untilFree: (n) => `Veel ${n} kohvi tasuta kohvini`,
     showQr: "Näita seda QR-koodi teenindajale"
@@ -123,6 +123,7 @@ async function init() {
 
 // ===== Start App =====
 init();
+
 
 
 
