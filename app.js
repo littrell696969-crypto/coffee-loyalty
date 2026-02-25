@@ -19,9 +19,21 @@ const translations = {
 function setLang(lang) {
   currentLang = lang;
   localStorage.setItem("lang", lang);
+
+  document.querySelectorAll("button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+
+  document.querySelector(`button[onclick="setLang('${lang}')"]`)
+    .classList.add("active");
+document.querySelectorAll("button").forEach(btn => {
+  btn.classList.remove("active");
+});
+
+document.querySelector(`button[onclick="setLang('${currentLang}')"]`)
+  .classList.add("active");
   init();
 }
-
 // ===== Supabase Config =====
 const SUPABASE_URL = "https://awuzfbnwkrtpwtbszmig.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXpmYm53a3J0cHd0YnN6bWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MDMxNjYsImV4cCI6MjA4NzE3OTE2Nn0.mOGcTwtKp8KC1tXZe9JvozygTfcRJPK2S8oXQcycVm8";
@@ -111,6 +123,7 @@ async function init() {
 
 // ===== Start App =====
 init();
+
 
 
 
