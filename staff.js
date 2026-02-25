@@ -51,17 +51,25 @@ async function addCoffee(userId) {
 
   result.innerText = `Coffee added: ${newCount}/6`;
 }
+let isScanning = false;
+
 async function onScanSuccess(decodedText) {
-  if (isScanning) return;   // prevent double scan
+  if (isScanning) return;
+
   isScanning = true;
 
-  await addCoffee(decodedText);
+  try {
+    await addCoffee(decodedText);
 
-  if (html5QrCode) {
-    await html5QrCode.stop();
+    if (html5QrCode) {
+      await html5QrCode.stop();
+    }
+
+  } catch (err) {
+    console.error(err);
   }
 
-  isScanning = false;
+  // Do NOT reset isScanning immediately
 }
 async function logout() {
   await supabaseClient.auth.signOut();
@@ -99,4 +107,5 @@ async function startScanner() {
   }
 }
   
+
 
