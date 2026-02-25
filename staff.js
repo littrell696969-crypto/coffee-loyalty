@@ -93,7 +93,4 @@ async function startScanner() {
     console.error(err);
   }
 }
-    console.error(err);
-  }
-
-}
+  
