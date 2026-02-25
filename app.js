@@ -1,3 +1,25 @@
+let currentLang = localStorage.getItem("lang") || "en";
+
+const translations = {
+  en: {
+    title: "Coffee Loyalty",
+    nextFree: "☕ Next coffee is FREE!",
+    untilFree: (n) => `${n} coffees until free one`,
+    showQr: "Show this QR code to staff"
+  },
+  et: {
+    title: "Kohvi Lojaalsuskaart",
+    nextFree: "☕ Järgmine kohv on TASUTA!",
+    untilFree: (n) => `Veel ${n} kohvi tasuta kohvini`,
+    showQr: "Näita seda QR-koodi teenindajale"
+  }
+};
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem("lang", lang);
+  init();
+}
 const SUPABASE_URL = "https://awuzfbnwkrtpwtbszmig.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXpmYm53a3J0cHd0YnN6bWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MDMxNjYsImV4cCI6MjA4NzE3OTE2Nn0.mOGcTwtKp8KC1tXZe9JvozygTfcRJPK2S8oXQcycVm8";
 
@@ -57,13 +79,13 @@ async function init() {
       stampsDiv.innerHTML += "⬜ ";
     }
   }
-
- if (data.coffee_count === 5) {
-  messageDiv.innerText = "☕ Next coffee is FREE!";
+if (data.coffee_count === 5) {
+  messageDiv.innerText = translations[currentLang].nextFree;
 } else {
   messageDiv.innerText =
-    (6 - data.coffee_count) + " coffees until free one";
+    translations[currentLang].untilFree(6 - data.coffee_count);
 }
+
 
   document.getElementById("qr").innerHTML = "";
   new QRCode(document.getElementById("qr"), userId);
@@ -71,3 +93,4 @@ async function init() {
 
 
 init();
+
