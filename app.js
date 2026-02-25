@@ -58,15 +58,16 @@ async function init() {
     }
   }
 
-  if (data.reward_ready) {
-    messageDiv.innerText = "🎉 Free Coffee Available!";
-  } else {
-    messageDiv.innerText =
-      (6 - data.coffee_count) + " coffees until free one";
-  }
+ if (data.coffee_count === 5) {
+  messageDiv.innerText = "☕ Next coffee is FREE!";
+} else {
+  messageDiv.innerText =
+    (6 - data.coffee_count) + " coffees until free one";
+}
 
   document.getElementById("qr").innerHTML = "";
   new QRCode(document.getElementById("qr"), userId);
 }
+
 
 init();
