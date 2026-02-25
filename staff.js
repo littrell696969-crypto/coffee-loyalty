@@ -67,9 +67,6 @@ async function startScanner() {
   const result = document.getElementById("result");
 
   try {
-    // Request camera permission first
-    await navigator.mediaDevices.getUserMedia({ video: true });
-
     const devices = await Html5Qrcode.getCameras();
 
     if (!devices || devices.length === 0) {
@@ -77,18 +74,11 @@ async function startScanner() {
       return;
     }
 
-    // Try to find back camera (phones)
     const backCamera = devices.find(device =>
       device.label && device.label.toLowerCase().includes("back")
     );
 
-    // Use back camera if found, otherwise fallback to first device (laptop safe)
     const cameraId = backCamera ? backCamera.id : devices[0].id;
-
-    if (!cameraId) {
-      result.innerText = "Camera not accessible";
-      return;
-    }
 
     html5QrCode = new Html5Qrcode("reader");
 
@@ -99,7 +89,11 @@ async function startScanner() {
     );
 
   } catch (err) {
-    result.innerText = "Camera access denied";
+    result.innerText = "Camera error";
     console.error(err);
   }
+}
+    console.error(err);
+  }
+
 }
