@@ -115,6 +115,7 @@ async function init() {
     messageDiv.innerText =
       translations[currentLang].untilFree(6 - data.coffee_count);
   }
+  
 
     // Generate QR
 document.getElementById("qr").innerHTML = "";
@@ -127,8 +128,11 @@ new QRCode(document.getElementById("qr"), {
   colorLight: "#ffffff",
   correctLevel: QRCode.CorrectLevel.H
 });}
+document.getElementById("customerIdDisplay").innerText =
+  "Customer ID: " + userId;
 // ===== Start App =====
 init();
+
 
 
 
