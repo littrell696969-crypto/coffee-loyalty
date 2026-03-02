@@ -116,13 +116,20 @@ async function init() {
       translations[currentLang].untilFree(6 - data.coffee_count);
   }
 
-  // Generate QR
-  document.getElementById("qr").innerHTML = "";
-  new QRCode(document.getElementById("qr"), userId);
-}
+    // Generate QR
+document.getElementById("qr").innerHTML = "";
 
+new QRCode(document.getElementById("qr"), {
+  text: userId,
+  width: 260,
+  height: 260,
+  colorDark: "#000000",
+  colorLight: "#ffffff",
+  correctLevel: QRCode.CorrectLevel.H
+});
 // ===== Start App =====
 init();
+
 
 
 
