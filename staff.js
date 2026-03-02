@@ -95,17 +95,24 @@ async function startScanner() {
 
     html5QrCode = new Html5Qrcode("reader");
 
-    await html5QrCode.start(
-      cameraId,
-      { fps: 10, qrbox: 250 },
-      onScanSuccess
-    );
-
+   await html5QrCode.start(
+  cameraId,
+  {
+    fps: 20,
+    qrbox: { width: 300, height: 300 },
+    aspectRatio: 1.0,
+    experimentalFeatures: {
+      useBarCodeDetectorIfSupported: true
+    }
+  },
+  onScanSuccess
+);
   } catch (err) {
     result.innerText = "Camera error";
     console.error(err);
   }
 }
   
+
 
 
