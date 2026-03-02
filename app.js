@@ -127,11 +127,13 @@ new QRCode(document.getElementById("qr"), {
   colorDark: "#000000",
   colorLight: "#ffffff",
   correctLevel: QRCode.CorrectLevel.H
-});}
+});
 document.getElementById("customerIdDisplay").innerText =
   "Customer ID: " + userId;
+ } 
 // ===== Start App =====
 init();
+
 
 
 
