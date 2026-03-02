@@ -128,11 +128,13 @@ new QRCode(document.getElementById("qr"), {
   colorLight: "#ffffff",
   correctLevel: QRCode.CorrectLevel.H
 });
+const shortId = userId.replace("user_", "");
 document.getElementById("customerIdDisplay").innerText =
-  "Customer ID: " + userId;
+  "Customer ID: " + shortId;
  } 
 // ===== Start App =====
 init();
+
 
 
 
