@@ -111,12 +111,18 @@ async function startScanner() {
     result.innerText = "Camera error";
     console.error(err);
   }
-}
   async function manualAdd() {
-  const id = document.getElementById("manualId").value.trim();
+  let id = document.getElementById("manualId").value.trim();
   if (!id) return;
+
+  if (!id.startsWith("user_")) {
+    id = "user_" + id;
+  }
+
   await addCoffee(id);
 }
+}
+ 
 
 
 
