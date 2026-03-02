@@ -112,7 +112,12 @@ async function startScanner() {
     console.error(err);
   }
 }
-  
+  async function manualAdd() {
+  const id = document.getElementById("manualId").value.trim();
+  if (!id) return;
+  await addCoffee(id);
+}
+
 
 
 
