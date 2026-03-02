@@ -126,9 +126,10 @@ new QRCode(document.getElementById("qr"), {
   colorDark: "#000000",
   colorLight: "#ffffff",
   correctLevel: QRCode.CorrectLevel.H
-});
+});}
 // ===== Start App =====
 init();
+
 
 
 
