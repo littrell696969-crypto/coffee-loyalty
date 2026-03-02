@@ -60,3 +60,10 @@ button.active {
 }
 
 
+.customer-id {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 1px;
+}
