@@ -130,3 +130,15 @@ async function logout() {
   window.location.href = "login.html";
 }
 
+const staffText = {
+  en: {
+    added: (n) => `Coffee added: ${n}/6`,
+    free: "🎉 FREE COFFEE!",
+    notFound: "User not found"
+  },
+  et: {
+    added: (n) => `Kohv lisatud: ${n}/6`,
+    free: "🎉 TASUTA KOHV!",
+    notFound: "Kasutajat ei leitud"
+  }
+};
