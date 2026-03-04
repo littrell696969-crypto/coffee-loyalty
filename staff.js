@@ -1,3 +1,43 @@
+let currentLang = localStorage.getItem("staffLang") || "en";
+
+const staffTranslations = {
+  en: {
+    title: "Staff Scanner",
+    scan: "Start Scanner",
+    logout: "Logout",
+    add: "Add Coffee",
+    placeholder: "Enter customer ID"
+  },
+  et: {
+    title: "Töötaja Skanner",
+    scan: "Käivita Skanner",
+    logout: "Logi välja",
+    add: "Lisa Kohv",
+    placeholder: "Sisesta kliendi ID"
+  }
+};
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem("staffLang", lang);
+
+  document.getElementById("title").innerText =
+    staffTranslations[lang].title;
+
+  document.getElementById("scanBtn").innerText =
+    staffTranslations[lang].scan;
+
+  document.getElementById("logoutBtn").innerText =
+    staffTranslations[lang].logout;
+
+  document.getElementById("addBtn").innerText =
+    staffTranslations[lang].add;
+
+  document.getElementById("manualId").placeholder =
+    staffTranslations[lang].placeholder;
+}
+
+
 const SUPABASE_URL = "https://awuzfbnwkrtpwtbszmig.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXpmYm53a3J0cHd0YnN6bWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MDMxNjYsImV4cCI6MjA4NzE3OTE2Nn0.mOGcTwtKp8KC1tXZe9JvozygTfcRJPK2S8oXQcycVm8";
 
@@ -170,3 +210,4 @@ function setLang(lang) {
 }
 
 setLang(currentLang);
+
