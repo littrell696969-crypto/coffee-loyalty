@@ -1,11 +1,13 @@
-
 const SUPABASE_URL = "https://awuzfbnwkrtpwtbszmig.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXpmYm53a3J0cHd0YnN6bWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MDMxNjYsImV4cCI6MjA4NzE3OTE2Nn0.mOGcTwtKp8KC1tXZe9JvozygTfcRJPK2S8oXQcycVm8";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXpmYm53a3J0cHd0YnN6bWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MDMxNjYsImV4cCI6MjA4NzE3OTE2Nn0.mOGcTwtKp8KC1tXZe9JvozygTfcRJPK2S8oXQcycVm8
+";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
+
+// Check if staff is logged in
 async function checkAuth() {
   const { data } = await supabaseClient.auth.getUser();
 
@@ -15,10 +17,14 @@ async function checkAuth() {
 }
 
 checkAuth();
+
+let html5QrCode = null;
+let isScanning = false;
+
+// Add coffee to user
 async function addCoffee(userId) {
   const result = document.getElementById("result");
 
-  // Get user
   const { data, error } = await supabaseClient
     .from("users")
     .select("coffee_count")
@@ -32,7 +38,6 @@ async function addCoffee(userId) {
 
   let newCount = data.coffee_count + 1;
 
-  // If reached 6 → reset to 0 and celebrate
   if (newCount >= 6) {
     await supabaseClient
       .from("users")
@@ -43,7 +48,6 @@ async function addCoffee(userId) {
     return;
   }
 
-  // Otherwise just update count
   await supabaseClient
     .from("users")
     .update({ coffee_count: newCount })
@@ -51,8 +55,8 @@ async function addCoffee(userId) {
 
   result.innerText = `Coffee added: ${newCount}/6`;
 }
-let isScanning = false;
 
+// When QR is scanned
 async function onScanSuccess(decodedText) {
   if (isScanning) return;
 
@@ -63,23 +67,21 @@ async function onScanSuccess(decodedText) {
 
     if (html5QrCode) {
       await html5QrCode.stop();
+      setTimeout(() => {
+        startScanner();
+      }, 1000);
     }
 
   } catch (err) {
     console.error(err);
   }
 
-setTimeout(() => {
-  isScanning = false;
-}, 3000);
-}
-async function logout() {
-  await supabaseClient.auth.signOut();
-  window.location.href = "login.html";
+  setTimeout(() => {
+    isScanning = false;
+  }, 3000);
 }
 
-let html5QrCode = null;
-
+// Start camera scanner
 async function startScanner() {
   const result = document.getElementById("result");
 
@@ -103,11 +105,7 @@ async function startScanner() {
       cameraId,
       {
         fps: 20,
-        qrbox: { width: 300, height: 300 },
-        aspectRatio: 1.0,
-        experimentalFeatures: {
-          useBarCodeDetectorIfSupported: true
-        }
+        qrbox: { width: 300, height: 300 }
       },
       onScanSuccess
     );
@@ -118,18 +116,22 @@ async function startScanner() {
   }
 }
 
+// Manual ID entry
 async function manualAdd() {
   let id = document.getElementById("manualId").value.trim();
   if (!id) return;
 
-  // allow short ID entry
   if (!id.startsWith("user_")) {
     id = "user_" + id;
   }
 
   await addCoffee(id);
+
+  document.getElementById("manualId").value = "";
 }
 
-
-
-
+// Logout
+async function logout() {
+  await supabaseClient.auth.signOut();
+  window.location.href = "login.html";
+}
