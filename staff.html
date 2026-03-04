@@ -1,69 +1,61 @@
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Staff Panel</title>
+<meta charset="UTF-8">
+<title>Staff Panel</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="https://unpkg.com/html5-qrcode@2.3.8"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://unpkg.com/html5-qrcode@2.3.8"></script>
 
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      padding: 20px;
-    }
+<style>
+body{
+  font-family: Arial;
+  text-align:center;
+  padding:20px;
+}
 
-    #reader {
-      margin: auto;
-      width: 350px;
-    }
+#reader{
+  margin:auto;
+  width:350px;
+}
 
-    input {
-      margin-top: 15px;
-      padding: 8px;
-      font-size: 16px;
-    }
+input{
+  margin-top:15px;
+  padding:8px;
+  font-size:16px;
+}
 
-    button {
-      padding: 10px;
-      margin: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
+button{
+  padding:10px;
+  margin:5px;
+  font-size:16px;
+  cursor:pointer;
+}
 
-    #result {
-      margin-top: 15px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-  </style>
+#result{
+  margin-top:15px;
+  font-size:20px;
+  font-weight:bold;
+}
+</style>
 </head>
 
 <body>
 
-<h1>Staff Scanner</h1>
+<!-- Language buttons -->
+<div>
+<button onclick="setLang('en')">EN</button>
+<button onclick="setLang('et')">ET</button>
+</div>
 
-<button onclick="startScanner()">Start Scanner</button>
-<button onclick="logout()">Logout</button>
-
-<div id="reader"></div>
-
-<br>
-
-<input id="manualId" placeholder="Enter customer ID">
-<button onclick="manualAdd()">Add Coffee</button>
-
-<p id="result"></p>
-  <h1 id="title">Staff Scanner</h1>
+<h1 id="title">Staff Scanner</h1>
 
 <button id="scanBtn" onclick="startScanner()">Start Scanner</button>
 <button id="logoutBtn" onclick="logout()">Logout</button>
 
 <div id="reader"></div>
+
+<br>
 
 <input id="manualId" placeholder="Enter customer ID">
 <button id="addBtn" onclick="manualAdd()">Add Coffee</button>
@@ -74,4 +66,3 @@
 
 </body>
 </html>
-
