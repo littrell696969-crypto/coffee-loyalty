@@ -142,3 +142,21 @@ const staffText = {
     notFound: "Kasutajat ei leitud"
   }
 };
+let currentLang = localStorage.getItem("staffLang") || "en";
+
+const staffTranslations = {
+  en: {
+    title: "Staff Scanner",
+    scan: "Start Scanner",
+    logout: "Logout",
+    add: "Add Coffee",
+    placeholder: "Enter customer ID"
+  },
+  et: {
+    title: "Töötaja Skanner",
+    scan: "Käivita Skanner",
+    logout: "Logi välja",
+    add: "Lisa Kohv",
+    placeholder: "Sisesta kliendi ID"
+  }
+};
