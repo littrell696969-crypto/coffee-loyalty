@@ -170,44 +170,25 @@ async function logout() {
   window.location.href = "login.html";
 }
 
-let currentLang = localStorage.getItem("staffLang") || "en";
-
-const staffTranslations = {
-  en: {
-    title: "Staff Scanner",
-    scan: "Start Scanner",
-    logout: "Logout",
-    add: "Add Coffee",
-    placeholder: "Enter customer ID"
-  },
-  et: {
-    title: "Töötaja Skanner",
-    scan: "Käivita Skanner",
-    logout: "Logi välja",
-    add: "Lisa Kohv",
-    placeholder: "Sisesta kliendi ID"
-  }
-};
-
-function setLang(lang) {
-  currentLang = lang;
-  localStorage.setItem("staffLang", lang);
-
-  document.getElementById("title").innerText =
-    staffTranslations[lang].title;
-
-  document.getElementById("scanBtn").innerText =
-    staffTranslations[lang].scan;
-
-  document.getElementById("logoutBtn").innerText =
-    staffTranslations[lang].logout;
-
-  document.getElementById("addBtn").innerText =
-    staffTranslations[lang].add;
-
-  document.getElementById("manualId").placeholder =
-    staffTranslations[lang].placeholder;
-}
-
 setLang(currentLang);
+async function checkAuth() {
+  const { data } = await supabaseClient.auth.getUser();
+
+  if (!data.user) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  const email = data.user.email;
+
+  if (email === "anna@gmail.com") {
+    document.getElementById("greeting").innerText = "Tere Anna!";
+  }
+  else if (email === "mari@gmail.com") {
+    document.getElementById("greeting").innerText = "Tere Mari!";
+  }
+  else {
+    document.getElementById("greeting").innerText = "Tere!";
+  }
+}
 
