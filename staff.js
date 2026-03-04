@@ -1,14 +1,11 @@
 const SUPABASE_URL = "https://awuzfbnwkrtpwtbszmig.supabase.co";
-
-const SUPABASE_ANON_KEY =
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXpmYm53a3J0cHd0YnN6bWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MDMxNjYsImV4cCI6MjA4NzE3OTE2Nn0.mOGcTwtKp8KC1tXZe9JvozygTfcRJPK2S8oXQcycVm8";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF3dXpmYm53a3J0cHd0YnN6bWlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MDMxNjYsImV4cCI6MjA4NzE3OTE2Nn0.mOGcTwtKp8KC1tXZe9JvozygTfcRJPK2S8oXQcycVm8";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_ANON_KEY
 );
 
-// Check if staff is logged in
 async function checkAuth() {
   const { data } = await supabaseClient.auth.getUser();
 
@@ -22,7 +19,6 @@ checkAuth();
 let html5QrCode = null;
 let isScanning = false;
 
-// Add coffee to user
 async function addCoffee(userId) {
   const result = document.getElementById("result");
 
@@ -57,7 +53,6 @@ async function addCoffee(userId) {
   result.innerText = `Coffee added: ${newCount}/6`;
 }
 
-// When QR is scanned
 async function onScanSuccess(decodedText) {
   if (isScanning) return;
 
@@ -82,7 +77,6 @@ async function onScanSuccess(decodedText) {
   }, 3000);
 }
 
-// Start camera scanner
 async function startScanner() {
   const result = document.getElementById("result");
 
@@ -117,7 +111,6 @@ async function startScanner() {
   }
 }
 
-// Manual ID entry
 async function manualAdd() {
   let id = document.getElementById("manualId").value.trim();
   if (!id) return;
@@ -131,10 +124,7 @@ async function manualAdd() {
   document.getElementById("manualId").value = "";
 }
 
-// Logout
 async function logout() {
   await supabaseClient.auth.signOut();
   window.location.href = "login.html";
 }
-
-
