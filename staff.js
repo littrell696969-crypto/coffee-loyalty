@@ -130,18 +130,6 @@ async function logout() {
   window.location.href = "login.html";
 }
 
-const staffText = {
-  en: {
-    added: (n) => `Coffee added: ${n}/6`,
-    free: "🎉 FREE COFFEE!",
-    notFound: "User not found"
-  },
-  et: {
-    added: (n) => `Kohv lisatud: ${n}/6`,
-    free: "🎉 TASUTA KOHV!",
-    notFound: "Kasutajat ei leitud"
-  }
-};
 let currentLang = localStorage.getItem("staffLang") || "en";
 
 const staffTranslations = {
@@ -160,3 +148,25 @@ const staffTranslations = {
     placeholder: "Sisesta kliendi ID"
   }
 };
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem("staffLang", lang);
+
+  document.getElementById("title").innerText =
+    staffTranslations[lang].title;
+
+  document.getElementById("scanBtn").innerText =
+    staffTranslations[lang].scan;
+
+  document.getElementById("logoutBtn").innerText =
+    staffTranslations[lang].logout;
+
+  document.getElementById("addBtn").innerText =
+    staffTranslations[lang].add;
+
+  document.getElementById("manualId").placeholder =
+    staffTranslations[lang].placeholder;
+}
+
+setLang(currentLang);
