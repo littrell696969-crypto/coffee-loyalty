@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,20 +9,57 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/html5-qrcode@2.3.8"></script>
-  
-<input type="text" id="manualId" placeholder="Enter customer ID">
-<button onclick="manualAdd()">Add Coffee</button>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #reader {
+      margin: auto;
+      width: 350px;
+    }
+
+    input {
+      margin-top: 15px;
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
-<body><button onclick="startScanner()">Start Scanner</button>
-<button onclick="logout()">Logout</button>
+
+<body>
+
 <h1>Staff Scanner</h1>
 
-<div id="reader" style="width:360px;"></div>
+<button onclick="startScanner()">Start Scanner</button>
+<button onclick="logout()">Logout</button>
+
+<div id="reader"></div>
+
+<br>
+
+<input id="manualId" placeholder="Enter customer ID">
+<button onclick="manualAdd()">Add Coffee</button>
+
 <p id="result"></p>
 
 <script src="staff.js"></script>
 
 </body>
-
 </html>
-
