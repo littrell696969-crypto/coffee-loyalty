@@ -181,14 +181,15 @@ async function checkAuth() {
 
   const email = data.user.email;
 
-  if (email === "anna@gmail.com") {
-    document.getElementById("greeting").innerText = "Tere Anna!";
+  if (email === "littrell696969@gmail.com") {
+    document.getElementById("greeting").innerText = "Tere Liina!";
   }
-  else if (email === "mari@gmail.com") {
-    document.getElementById("greeting").innerText = "Tere Mari!";
+  else if (email === "sild21@hot.ee") {
+    document.getElementById("greeting").innerText = "Tere Kadi!";
   }
   else {
     document.getElementById("greeting").innerText = "Tere!";
   }
 }
+
 
