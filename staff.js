@@ -69,13 +69,17 @@ async function onScanSuccess(decodedText) {
     console.error(err);
   }
 
-  // Do NOT reset isScanning immediately
+setTimeout(() => {
+  isScanning = false;
+}, 3000);
 }
 async function logout() {
   await supabaseClient.auth.signOut();
   window.location.href = "login.html";
 }
+
 let html5QrCode = null;
+
 async function startScanner() {
   const result = document.getElementById("result");
 
@@ -95,34 +99,36 @@ async function startScanner() {
 
     html5QrCode = new Html5Qrcode("reader");
 
-   await html5QrCode.start(
-  cameraId,
-  {
-    fps: 20,
-    qrbox: { width: 300, height: 300 },
-    aspectRatio: 1.0,
-    experimentalFeatures: {
-      useBarCodeDetectorIfSupported: true
-    }
-  },
-  onScanSuccess
-);
+    await html5QrCode.start(
+      cameraId,
+      {
+        fps: 20,
+        qrbox: { width: 300, height: 300 },
+        aspectRatio: 1.0,
+        experimentalFeatures: {
+          useBarCodeDetectorIfSupported: true
+        }
+      },
+      onScanSuccess
+    );
+
   } catch (err) {
     result.innerText = "Camera error";
     console.error(err);
   }
-  async function manualAdd() {
+}
+
+async function manualAdd() {
   let id = document.getElementById("manualId").value.trim();
   if (!id) return;
 
+  // allow short ID entry
   if (!id.startsWith("user_")) {
     id = "user_" + id;
   }
 
   await addCoffee(id);
 }
-}
- 
 
 
 
