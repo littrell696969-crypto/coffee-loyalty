@@ -95,16 +95,17 @@ async function startScanner() {
     const cameraId = backCamera ? backCamera.id : devices[0].id;
 
     html5QrCode = new Html5Qrcode("reader");
-
-    await html5QrCode.start(
-      cameraId,
-      {
-        fps: 20,
-        qrbox: { width: 300, height: 300 }
-      },
-      onScanSuccess
-    );
-
+await html5QrCode.start(
+  cameraId,
+  {
+    fps: 10,
+    qrbox: { width: 280, height: 280 },
+    aspectRatio: 1.0,
+    disableFlip: false
+  },
+  onScanSuccess
+);
+   
   } catch (err) {
     result.innerText = "Camera error";
     console.error(err);
@@ -128,3 +129,4 @@ async function logout() {
   await supabaseClient.auth.signOut();
   window.location.href = "login.html";
 }
+
